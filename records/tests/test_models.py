@@ -10,6 +10,7 @@ from records.models.records import Record
 class BatteryModelTest(TestCase):
 
     def setUp(self):
+
         self.battery = Battery.objects.create(
             battery_model="Model A", battery_serial_number="1234567890"
         )

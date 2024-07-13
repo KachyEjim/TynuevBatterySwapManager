@@ -2,6 +2,7 @@ from typing import Any
 from django.db import models, transaction
 from datetime import datetime
 from .base import BaseModel
+from .users import User
 
 
 class IDTracker(BaseModel):
@@ -22,7 +23,6 @@ class Rider(BaseModel):
     last_name = models.CharField(max_length=100, null=False, blank=False)
     date_of_birth = models.DateField(null=True, blank=True)
     email = models.EmailField(max_length=100, unique=True, null=False, blank=False)
-    password = models.CharField(max_length=255, null=False, blank=False)
     address = models.TextField(null=True, blank=True)
     phone_number = models.CharField(max_length=15, null=True, blank=True)
     place_of_birth = models.CharField(max_length=100, null=True, blank=True)
@@ -60,6 +60,7 @@ class Rider(BaseModel):
     avg_weekly_earnings = models.DecimalField(
         max_digits=10, decimal_places=2, null=True, blank=True
     )
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="riders")
 
     def save(self, *args: Any, **kwargs: Any) -> None:
         """

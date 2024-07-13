@@ -58,5 +58,5 @@ class RecordAdmin(admin.ModelAdmin):
 
 @admin.register(KinGuarantorInfo)
 class KinGuarantorInfoAdmin(admin.ModelAdmin):
-    list_display = ("next_of_kin_name", "guarantor_full_name", "rider", "created_at")
+    list_display = ("next_of_kin_name", "guarantor_full_name", "created_at")
     search_fields = ("next_of_kin_name", "guarantor_full_name", "rider__rider_id")
