@@ -84,12 +84,16 @@ WSGI_APPLICATION = "tynuev.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-import dj_database_url
-
-DATABASES = {"default": dj_database_url.config(conn_max_age=600)}
-
-ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "").split(",")
-
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.mysql",
+        "NAME": env("DATABASE_NAME"),
+        "USER": env("DATABASE_USER"),
+        "PASSWORD": env("DATABASE_PASSWORD"),
+        "HOST": env("DATABASE_HOST"),
+        "PORT": env("DATABASE_PORT", default="3306"),
+    }
+}
 
 AUTHENTICATION_BACKENDS = (
     "records.backends.EmailAuthBackend",
