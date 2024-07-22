@@ -33,6 +33,7 @@ def login_view(request):
     error_message = None
     if request.method == "POST":
         form = LoginForm(data=request.POST)
+        print(form.is_valid())
         if form.is_valid():
             email = form.cleaned_data.get("email")
             password = form.cleaned_data.get("password")
@@ -69,6 +70,7 @@ def verify(request):
             redirect("add_rider")
 
 
+@login_required
 def dashboard(request, segment1=None, segment2=None):
     batteries = Battery.objects.all()
     user = request.user
@@ -101,6 +103,7 @@ def dashboard(request, segment1=None, segment2=None):
     return render(request, "user/dashboard/dashboard.html", context)
 
 
+@login_required
 def record_ride(request):
     user = request.user
     datetime_str = request.POST.get("datetime")

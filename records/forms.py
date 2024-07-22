@@ -52,6 +52,14 @@ class SignupForm(UserCreationForm):
             "password2",
         ]
 
+    def save(self, commit=True):
+        user = super().save(commit=False)
+        user.is_active = True
+
+        if commit:
+            user.save()
+        return user
+
 
 class LoginForm(forms.Form):
     email = forms.EmailField(
@@ -59,7 +67,7 @@ class LoginForm(forms.Form):
         widget=forms.EmailInput(
             attrs={
                 "class": "form-control",
-                "placeholder": 'form-control", "placeholder": "Enter your email',
+                "placeholder": "Enter your email",
                 "id": "id_email",
             }
         ),
@@ -70,6 +78,9 @@ class LoginForm(forms.Form):
             attrs={"class": "form-control", "placeholder": "Password"}
         ),
     )
+
+    def is_valid(self):
+        return super().is_valid()
 
 
 class RecordForm(forms.ModelForm):
