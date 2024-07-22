@@ -1,0 +1,94 @@
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    overflow-x: scroll; 
+    box-sizing: border-box;
+    background: url('../img/banner1.jpg') no-repeat center center fixed;
+    background-size: cover;
+}   
+
+header {
+    background-color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 75px;
+
+    
+}
+.fixed-top{
+    z-index: 100;
+}
+
+
+
+/* Footer Styles */
+.custom-footer {
+    width: 105%;
+    margin-top: 115px;
+    text-align: center;
+    background-color: #343a40; /* Background color for the footer */
+    color: white; /* Text color for the footer */
+    }
+
+.custom-footer p {
+    margin: 5px 0;
+    font-weight: bold;
+    color: #007bff;
+}
+
+.custom-footer ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 10px 0;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.custom-footer ul li {
+    margin: 0 10px;
+    font-size: 14px;
+}
+
+.custom-footer ul li a {
+    color: white;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.custom-footer ul li a:hover {
+    color: #007bff; /* Color change on hover */
+}
+
+#fot {
+    font-weight: bold;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .custom-footer ul li {
+        margin: 5px 10px;
+    }
+    .custom-footer {
+        background-color: #343a40; /* Background color for the footer */
+        color: white; /* Text color for the footer */
+        display: flex;
+        flex-direction: column;
+    }
+    
+}
+
+@media (max-width: 480px) {
+    .custom-footer ul li {
+        font-size: 12px;
+    }
+    
+    #fot {
+        font-size: 12px;
+    }
+    
+    .custom-footer p {
+        font-size: 10px;
+    }
+}

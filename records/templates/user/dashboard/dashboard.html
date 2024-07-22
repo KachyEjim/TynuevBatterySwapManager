@@ -1,0 +1,158 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %} - Rider Dashboard{% endblock %}
+
+{% block extra_head %}
+    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}?v={{ timestamp }}">
+    <script src="{% static 'js/dashboard.js' %}?v={{ timestamp }}"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+{% endblock %}
+
+{% block header %}
+<header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <img src="{% static 'img/logo.svg' %}" alt="Rider Profile" id="pi" class="profile-pic">
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul id="nav1" class="navbar-nav ml-auto">
+                    {% block nav %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="fa fa-info-circle"></i>Help</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link"  href="#">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><span class="fa fa-cog"></span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link btn btn-primary text-white" href="#"><span class="fa fa-sign-out-alt"></span>Logout</a>
+                    </li>
+                    {% endblock %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+{% endblock %}
+
+{% block content %}
+<!-- Navigation Bar -->
+<div class="navigation-bar">
+    <a href="{% url 'dashboard' %}" class="active">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-layout-grid"><rect width="7" height="7" x="3" y="3" rx="1"></rect><rect width="7" height="7" x="14" y="3" rx="1"></rect><rect width="7" height="7" x="14" y="14" rx="1"></rect><rect width="7" height="7" x="3" y="14" rx="1"></rect></svg>
+        Dashboard
+    </a>
+
+    <a href="{% url 'signup' %}">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-receipt-text"><path d="M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1V2l-2 1-2-1-2 1-2-1-2 1-2-1Z"></path><path d="M14 8H8"></path><path d="M16 12H8"></path><path d="M13 16H8"></path></svg>
+        Update Info
+    </a>
+    <a href="{% url 'dashboard' %}">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-bar-chart"><path d="M12 20V10"></path><path d="M18 20V4"></path><path d="M6 20v-4"></path></svg>
+        Statistics
+    </a>
+</div>
+
+<!-- Main Content -->
+<div class="main-content">
+    {% block main_content %}
+    <div class="col-md-12">
+        <div class="card add-record-card">
+            <div class="card-header add-record-card-header">
+                <i class="fas fa-exchange-alt"></i> Swap Battery
+            </div>
+            <div class="card-body add-record-card-body">
+                <form id="add-record-form">
+                    <div class="form-group datetime-group">
+                        <label for="datetime"><i class="fas fa-calendar-alt"></i> Date & Time</label>
+                        <div class="input-group">
+                            <input type="datetime-local" class="form-control" id="datetime" name="datetime" required>
+                            <button class="btn btn-outline-secondary now-button" type="button" id="datetime-now"><i class="fas fa-clock"></i> Now</button>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="kilometer"><i class="fas fa-tachometer-alt"></i> Kilometer (km)</label>
+                        <input type="number" step="0.01" class="form-control" id="kilometer" name="kilometer" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="battery"><i class="fas fa-battery-full"></i> Battery</label>
+                        <select class="form-control" id="battery" name="battery" required>
+                            <option value="">Select Battery</option>
+                            {% for battery in batteries %}
+                            <option value="{{ battery.id }}">{{ battery.battery_model }} - {{ battery.battery_serial_number }}</option>
+                        {% endfor %}
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary"><i class="fa fa-sync"></i> SWAP</button>
+                </form>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <i class="fas fa-exchange-alt"></i> Swap Records
+                    </div>
+                    <div class="card-body">
+                        <table class="records-table">
+                            <thead>
+                                <tr>
+                                    <th><i class="fas fa-calendar-alt"></i> Date</th>
+                                    <th><i class="fas fa-clock"></i> Time</th>
+                                    <th><i class="fas fa-tachometer-alt"></i> Kilometer (km)</th>
+                                    <th><i class="fas fa-bicycle"></i> Bike</th>
+                                    <th><i class="fas fa-battery-full"></i> Battery</th>
+                                    <th><i class="fas fa-edit"></i> Edit</th>
+                                    <th><i class="fas fa-trash-alt"></i> Delete</th>
+                                </tr>
+                            </thead>
+                            <tbody id="records-tbody">
+                                {% for record in record_data %}
+                                <tr>
+                                    <td>{{ record.date }}</td>
+                                    <td>{{ record.time }}</td>
+                                    <td>{{ record.kilometer }} km</td>
+                                    <td>{{ record.bike_model}}</td>
+                                    <td>{{ record.battery_model }}</td>
+                                    <td><button class="btn btn-edit"><i class="fas fa-edit"></i></button></td>
+                                    <td><button class="btn btn-delete"><i class="fas fa-trash-alt"></i></button></td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="list-all-btn-container">
+                        <button class="list-all-btn">List All Records</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% endblock %}
+</div>
+{% endblock %}
+{% block footer %}
+<div class="custom-footer">
+    <p>Contact Us</p>
+    <ul>
+        <li><a href="#"><i class="fab fa-facebook-f"></i> Facebook</a></li>
+        <li><a href="#"><i class="fab fa-twitter"></i> Twitter</a></li>
+        <li><a href="#"><i class="fab fa-instagram"></i> Instagram</a></li>
+        <li><a href="#"><i class="fab fa-linkedin-in"></i> LinkedIn</a></li>
+        <li><a href="#"><i class="fas fa-info-circle"></i></i> About Us</a></li>
+    </ul>
+    <p id="fot">&copy; {{ current_year }} Tynuev. All rights reserved.</p>
+</div>
+{% endblock %}
+

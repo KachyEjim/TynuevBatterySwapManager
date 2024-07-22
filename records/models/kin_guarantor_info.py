@@ -26,7 +26,7 @@ class KinGuarantorInfo(BaseModel):
     guarantor_id = models.ImageField(
         upload_to="kin/guarantor_ids/", null=True, blank=True
     )
-    user = models.ForeignKey(
+    user = models.OneToOneField(
         User, on_delete=models.CASCADE, related_name="kin_guarantor_info"
     )
 

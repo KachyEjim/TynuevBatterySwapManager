@@ -95,6 +95,12 @@ DATABASES = {
     }
 }
 
+AUTHENTICATION_BACKENDS = (
+    "records.backends.EmailAuthBackend",
+    "django.contrib.auth.backends.ModelBackend",  # Default authentication backend
+)
+
+AUTH_USER_MODEL = "records.User"
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
@@ -141,8 +147,21 @@ MEDIA_ROOT = BASE_DIR / "media"
 
 STATIC_URL = "/static/"
 STATICFILES_DIRS = [BASE_DIR / "static"]
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+"""SESSION_SAVE_EVERY_REQUEST: 
+If set to True, the session's expiry date will 
+be updated each time the user makes a request, effectively 
+extending the session duration."""
+SESSION_SAVE_EVERY_REQUEST = False
+SESSION_EXPIRE_AT_BROWSER_CLOSE = False
+SESSION_COOKIE_AGE = 12096  # 2 weeks
+
+
+LOGIN_URL = "login/"
+ALLOWED_HOSTS = ["*"]

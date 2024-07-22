@@ -3,6 +3,7 @@ from django.db import models, transaction
 from datetime import datetime
 from .base import BaseModel
 from .users import User
+from .bikes import Bike
 
 
 class IDTracker(BaseModel):
@@ -18,11 +19,11 @@ class Rider(BaseModel):
     Model to store information about a rider.
     """
 
-    rider_id = models.CharField(max_length=20, unique=True, null=False, blank=False)
-    first_name = models.CharField(max_length=100, null=False, blank=False)
-    last_name = models.CharField(max_length=100, null=False, blank=False)
+    rider_id = models.CharField(max_length=20, unique=True, null=True, blank=True)
+    first_name = models.CharField(max_length=100, null=True, blank=True)
+    last_name = models.CharField(max_length=100, null=True, blank=True)
     date_of_birth = models.DateField(null=True, blank=True)
-    email = models.EmailField(max_length=100, unique=True, null=False, blank=False)
+    email = models.EmailField(max_length=100, unique=True, null=True, blank=True)
     address = models.TextField(null=True, blank=True)
     phone_number = models.CharField(max_length=15, null=True, blank=True)
     place_of_birth = models.CharField(max_length=100, null=True, blank=True)
@@ -56,11 +57,14 @@ class Rider(BaseModel):
     )
     marital_status = models.CharField(max_length=20, null=True, blank=True)
     delivery_companies = models.CharField(max_length=255, null=True, blank=True)
-    avg_deliveries_per_day = models.IntegerField(null=False, blank=False)
+    avg_deliveries_per_day = models.IntegerField(null=True, blank=True)
     avg_weekly_earnings = models.DecimalField(
         max_digits=10, decimal_places=2, null=True, blank=True
     )
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="riders")
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="rider")
+    bike = models.OneToOneField(
+        Bike, on_delete=models.CASCADE, null=True, blank=True, related_name="rider"
+    )
 
     def save(self, *args: Any, **kwargs: Any) -> None:
         """
