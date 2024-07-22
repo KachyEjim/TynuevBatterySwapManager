@@ -5,7 +5,7 @@ urlpatterns = [
     path("signup/", signup, name="signup"),
     path("login/", login_view, name="login"),
     path("logout/", logout_view, name="logout"),
-    path("dashboard/", dashboard, name="dashboard"),  # Add this line
+    path("", dashboard, name="dashboard"),  # Add this line
     path("dashboard/<str:segment1>/", dashboard, name="dashboard_with_segment1"),
     path(
         "dashboard/<str:segment1>/<str:segment2>/",

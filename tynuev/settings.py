@@ -14,7 +14,7 @@ environ.Env.read_env(os.path.join(BASE_DIR, ".env"))
 SECRET_KEY = env("SECRET_KEY", default="your-default-secret-key")
 
 # Set allowed hosts
-ALLOWED_HOSTS = env("ALLOWED_HOSTS", default="tynuev.onrender.com").split(",")
+ALLOWED_HOSTS = env("ALLOWED_HOSTS", default="*").split(",")
 
 # Database configuration using dj-database-url
 
@@ -27,7 +27,7 @@ DATABASES = {
 STATIC_URL = "/static/"
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
-
+DEBUG = True
 # Application definition
 INSTALLED_APPS = [
     "records",
@@ -102,7 +102,6 @@ USE_TZ = True
 MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
 
-STATICFILES_DIRS = [BASE_DIR / "static"]
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
