@@ -1,9 +1,9 @@
 services:
   - type: web
-    name: my-django-app
+    name: tynuev
     env: python
     buildCommand: pipenv install --deploy --ignore-pipfile
-    startCommand: pipenv run gunicorn myapp.wsgi:application
+    startCommand: pipenv run gunicorn tynuev.wsgi:application
     envVars:
       - key: DJANGO_SETTINGS_MODULE
         value: myapp.settings
