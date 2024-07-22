@@ -8,10 +8,7 @@ mysqlclient = "*"
 django-environ = "*"
 pillow = "*"
 django = {extras = ["bcrypt"], version = "*"}
-django-phonenumber-field = "*"
-phonenumbers = "*"
 django-allauth = "*"
-firebase-admin = "*"
 mysql-connector-python = "*"
 
 [dev-packages]
