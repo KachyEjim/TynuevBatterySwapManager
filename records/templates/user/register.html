@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Tynuev - Register{% endblock %}
+
+{% block extra_head %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/register.css' %}?v={{ timestamp }}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+{% endblock %}
+
+{% block content %}
+<div class="container1 mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <div class="card">
+                <div class="card-body">
+                    <div class="sign">
+                        <h2><b>Sign Up</b></h2>
+                    </div>
+                    <form id="signupForm" method="post" action="{% url 'signup' %}">
+                        {% csrf_token %}
+                        <div class="form-field">
+                            {{ form.first_name.label_tag }}
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fas fa-user"></i></span>
+                                </div>
+                                {{ form.first_name }}
+                            </div>
+                            {{ form.first_name.errors }}
+                        </div>
+                        <div class="form-field">
+                            {{ form.last_name.label_tag }}
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fas fa-user"></i></span>
+                                </div>
+                                {{ form.last_name }}
+                            </div>
+                            {{ form.last_name.errors }}
+                        </div>
+                        <div class="form-field">
+                            {{ form.email.label_tag }}
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                                </div>
+                                {{ form.email }}
+                            </div>
+                            {{ form.email.errors }}
+                        </div>
+                        <div class="form-field">
+                            {{ form.password1.label_tag }}
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                                </div>
+                                {{ form.password1 }}
+                            </div>
+                            <div class="password-help" id="passwordHelp">Password must be at least 8 characters long.</div>
+                            {{ form.password1.errors }}
+                        </div>
+                        <div class="form-field">
+                            {{ form.password2.label_tag }}
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                                </div>
+                                {{ form.password2 }}
+                            </div>
+                            {{ form.password2.errors }}
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block">Sign Up</button>
+                    </form>
+                    <div class="text-center mt-3">
+                        <a href="{% url 'signup' %}">Already have an account? Login</a><br>
+                        <a href="#">Forgotten password?</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="{% static 'js/register.js' %}"></script>
+{% endblock %}
