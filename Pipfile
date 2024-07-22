@@ -11,7 +11,12 @@ django = {extras = ["bcrypt"], version = "*"}
 django-allauth = "*"
 mysql-connector-python = "*"
 
+gunicorn = "*"
+dj-database-url = "*"
+
 [dev-packages]
+pytest-django = "*"
+
 
 [requires]
 python_version = "3.8"
