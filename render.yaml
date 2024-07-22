@@ -16,7 +16,7 @@ services:
         value: "TYNUEV_PROJECT"
       - key: ALLOWED_HOSTS
         value: "tynuev.onrender.com"
-    staticPublishPath: /staticfiles
+    staticPublishPath: staticfiles
 
 databases:
   - name: tynuev_db
