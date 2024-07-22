@@ -15,7 +15,7 @@ services:
         sync: false
         value: "your-secret-key"
       - key: ALLOWED_HOSTS
-        value: "tynuev.onrender.com"
+        value: "https://tynuevbatteryswapmanager.onrender.com"
 
 databases:
   - name: my-mysql-database
