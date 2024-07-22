@@ -1,8 +1,28 @@
 services:
-  - type: database
-    name: tynuev_db
+  - type: web
+    name: tynuev
+    env: python
+    buildCommand: pipenv install --deploy --ignore-pipfile && pipenv run python manage.py collectstatic --noinput
+    startCommand: pipenv run gunicorn tynuev.wsgi:application
+    envVars:
+      - key: DJANGO_SETTINGS_MODULE
+        value: tynuev.settings
+      - key: DATABASE_URL
+        fromDatabase:
+          name: tynuev_db
+          property: connectionString
+      - key: SECRET_KEY
+        sync: false
+        value: "your-secret-key"
+      - key: ALLOWED_HOSTS
+        value: "tynuev.onrender.com"
+    staticPublishPath: staticfiles
+
+databases:
+  - name: tynuev_db
+    type: postgres
     plan: free
-    version: 8.0
+    version: 16
     settings:
       max_connections: 100
       default_transaction_isolation: READ COMMITTED

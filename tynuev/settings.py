@@ -17,12 +17,12 @@ SECRET_KEY = env("SECRET_KEY", default="your-default-secret-key")
 ALLOWED_HOSTS = env("ALLOWED_HOSTS", default="tynuev.onrender.com").split(",")
 
 # Database configuration using dj-database-url
+
 DATABASES = {
     "default": dj_database_url.config(
-        default=os.environ.get("DATABASE_URL"), engine="django.db.backends.mysql"
+        default=os.environ.get("DATABASE_URL"), engine="django.db.backends.postgresql"
     )
 }
-
 # Static files settings
 STATIC_URL = "/static/"
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
