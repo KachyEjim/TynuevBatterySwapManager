@@ -2,23 +2,24 @@ services:
   - type: web
     name: tynuev
     env: python
-    buildCommand: pipenv install --deploy --ignore-pipfile
+    buildCommand: pipenv install --deploy --ignore-pipfile && pipenv run python manage.py collectstatic --noinput
     startCommand: pipenv run gunicorn tynuev.wsgi:application
     envVars:
       - key: DJANGO_SETTINGS_MODULE
-        value: myapp.settings
+        value: tynuev.settings
       - key: DATABASE_URL
         fromDatabase:
-          name: my-mysql-database
+          name: tynuev_db
           property: connectionString
       - key: SECRET_KEY
         sync: false
-        value: "your-secret-key"
+        value: "TYNUEV_PROJECT"
       - key: ALLOWED_HOSTS
-        value: "https://tynuevbatteryswapmanager.onrender.com"
+        value: "tynuev.onrender.com"
+    staticPublishPath: /staticfiles
 
 databases:
-  - name: my-mysql-database
+  - name: tynuev_db
     type: mysql
     plan: free
     version: 8.0
@@ -27,12 +28,3 @@ databases:
       default_transaction_isolation: READ COMMITTED
       character_set_server: utf8mb4
       collation_server: utf8mb4_unicode_ci
-
-# Optional: Specify static files if needed
-staticFiles:
-  - src: /static
-    dest: /static
-
-# Optional: Specify additional files to be included in the deployment
-includeFiles:
-  - path: .env
