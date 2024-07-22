@@ -76,6 +76,10 @@ header {
         display: flex;
         flex-direction: column;
     }
+    body {
+        background-size: contain; /* Adjusts the background to be contained within the screen */
+        background-position: center;
+    }
     
 }
 
