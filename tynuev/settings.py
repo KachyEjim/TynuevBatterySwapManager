@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 from pathlib import Path
 import environ
 import os
+import dj_database_url
 
 
 # Read .env file
@@ -32,7 +33,7 @@ SECRET_KEY = "django-insecure-gv$jyvlj26471g+mvzna_ftk@8-ho^7g-^m+=si_%3y+41w%6e
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = env("ALLOWED_HOSTS").split(",")
 
 
 # Application definition
@@ -86,14 +87,9 @@ WSGI_APPLICATION = "tynuev.wsgi.application"
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.mysql",
-        "NAME": env("DATABASE_NAME"),
-        "USER": env("DATABASE_USER"),
-        "PASSWORD": env("DATABASE_PASSWORD"),
-        "HOST": env("DATABASE_HOST"),
-        "PORT": env("DATABASE_PORT", default="3306"),
-    }
+    "default": dj_database_url.config(
+        default=os.environ.get("DATABASE_URL"), engine="django.db.backends.mysql"
+    )
 }
 
 AUTHENTICATION_BACKENDS = (
@@ -149,6 +145,8 @@ MEDIA_ROOT = BASE_DIR / "media"
 STATIC_URL = "/static/"
 STATICFILES_DIRS = [BASE_DIR / "static"]
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+# Add these lines to configure WhiteNoise
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
@@ -165,4 +163,3 @@ SESSION_COOKIE_AGE = 12096  # 2 weeks
 
 
 LOGIN_URL = "login/"
-ALLOWED_HOSTS = ["*"]
