@@ -12,4 +12,6 @@ urlpatterns = [
         dashboard,
         name="dashboard_with_subroute",
     ),
+    path("verify-email/", views.verify - email, name="verify_email"),
+    path("verify-email/<uidb64>/<token>/", views.verify_email, name="verify_email"),
 ]
