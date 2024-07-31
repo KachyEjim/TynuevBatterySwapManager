@@ -1,5 +1,6 @@
 from django.urls import path
-from .views import signup, login_view, dashboard, logout_view
+from .views.views import signup, login_view, dashboard, logout_view
+from .views.emailVerify_view import send_verification_email, verify_email
 
 urlpatterns = [
     path("signup/", signup, name="signup"),
@@ -12,6 +13,10 @@ urlpatterns = [
         dashboard,
         name="dashboard_with_subroute",
     ),
-    path("verify-email/", views.verify - email, name="verify_email"),
-    path("verify-email/<uidb64>/<token>/", views.verify_email, name="verify_email"),
+    path(
+        "send_verification_email/",
+        send_verification_email,
+        name="send_verification_email",
+    ),
+    path("verify-email/<uidb64>/<token>/", verify_email, name="verify_email"),
 ]

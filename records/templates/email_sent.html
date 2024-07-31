@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}Email Verification Sent{% endblock %}
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Smooth scroll to the email link
+        document.querySelector('.email-link').addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = this.getAttribute('href');
+            window.location.href = target;
+        });
+    });
+</script>
+
+{% block content %}
+<div class="container text-center email-sent-container">
+    <div class="email-sent-content">
+        <h1 class="email-sent-title"><i class="fas fa-envelope-open-text"></i> Email Verification Sent!</h1>
+        <p>We've sent a verification email to your inbox. Please check your email and click on the verification link to activate your account.</p>
+        <a href="mailto:{{ user.email }}" class="btn btn-primary btn-lg email-link">Go to Your Email <i class="fas fa-external-link-alt"></i></a>
+        <p class="mt-3">Didn't receive the email? <a href="#">Resend verification email</a> or check your spam folder.</p>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="{% static 'css/email_sent.css' %}">
+{% endblock %}
