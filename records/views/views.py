@@ -9,19 +9,21 @@ from django.contrib.auth import (
 from django.http import JsonResponse
 
 from datetime import datetime
-from .forms import SignupForm, LoginForm
+from ..forms import SignupForm, LoginForm
 from django.utils.timezone import now
 from django.contrib.auth.decorators import login_required
-from .models.bikes import Bike
-from .models.batteries import Battery
-from .forms import RecordForm
+from ..models.bikes import Bike
+from ..models.batteries import Battery
+from ..forms import RecordForm
+from .emailVerify_view import send_verification_email
 
 
 def signup(request):
     if request.method == "POST":
         form = SignupForm(request.POST)
         if form.is_valid():
-            form.save()
+            user = form.save()
+            send_verification_email(request, user)
             return redirect("login")
     else:
         form = SignupForm()
