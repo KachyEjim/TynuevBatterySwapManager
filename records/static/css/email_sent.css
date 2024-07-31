@@ -53,7 +53,7 @@
 }
 
 .email-sent-container a:hover {
-    color: #0056b3;
+    color:orangered;
 }
 
 /* Responsive Design */
@@ -84,5 +84,6 @@
 
     .email-link {
         font-size: 0.9em;
+        font-style: italic;
     }
 }
