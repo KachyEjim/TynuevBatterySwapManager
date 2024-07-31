@@ -2,6 +2,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from records.models.users import User
 from records.models.records import Record
+from django.contrib.auth.tokens import PasswordResetTokenGenerator
 
 
 class SignupForm(UserCreationForm):
@@ -87,3 +88,10 @@ class RecordForm(forms.ModelForm):
     class Meta:
         model = Record
         fields = ["date_time", "kilometer", "bike", "battery"]
+
+
+class EmailVerificationTokenGenerator(PasswordResetTokenGenerator):
+    pass
+
+
+email_verification_token = EmailVerificationTokenGenerator()
