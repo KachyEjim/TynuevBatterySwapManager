@@ -23,8 +23,9 @@ def signup(request):
         form = SignupForm(request.POST)
         if form.is_valid():
             user = form.save()
+            context = {"user": user, "timestamp": now().timestamp()}
             send_verification_email(request, user)
-            return render("email_sent.html", user)
+            return render("email_sent.html", context)
     else:
         form = SignupForm()
     context = {"form": form, "timestamp": now().timestamp()}
