@@ -3,7 +3,7 @@ import environ
 import os
 import dj_database_url
 
-
+CSRF_TRUSTED_ORIGINS = ["https://e9ca-197-210-226-199.ngrok-free.app"]
 # Define base directory
 BASE_DIR = Path(__file__).resolve().parent.parent
 # Initialize environment variables
@@ -14,7 +14,9 @@ environ.Env.read_env(os.path.join(BASE_DIR, ".env"))
 SECRET_KEY = env("SECRET_KEY", default="your-default-secret-key")
 
 # Set allowed hosts
-ALLOWED_HOSTS = env("ALLOWED_HOSTS", default="*").split(",")
+ALLOWED_HOSTS = env(
+    "ALLOWED_HOSTS", default="e9ca-197-210-226-199.ngrok-free.app"
+).split(",")
 
 # Database configuration using dj-database-url
 
@@ -101,7 +103,11 @@ USE_TZ = True
 
 MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
-
+# settings.py
+STATICFILES_FINDERS = [
+    "django.contrib.staticfiles.finders.FileSystemFinder",
+    "django.contrib.staticfiles.finders.AppDirectoriesFinder",
+]
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
@@ -118,5 +124,5 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = "drealkachy@gmail.com"
 EMAIL_HOST_PASSWORD = "fkeowlegtnxodmqf"
-DEFAULT_FROM_EMAIL = "tynuev"
+DEFAULT_FROM_EMAIL = "Tynuev <drealkachy@gmail.com>"
 ACCOUNT_EMAIL_SUBJECT_PREFIX = ""

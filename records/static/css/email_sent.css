@@ -1,19 +1,48 @@
-.email-sent-container {
-    margin-top: 100px;
-    background-color: rgba(255, 255, 255, 0.9);
-    padding: 50px 30px;
-    border-radius: 10px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+/* General Container Styles */
+.container {
+    max-width: 900px;
+    margin: auto;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 20px;
+
 }
 
-.email-sent-content {
-    max-width: 600px;
-    margin: auto;
+/* Greeting Box Styles */
+.greeting-box {
+    margin-top: 130px;
+    background-color: #f8f9fa;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.greeting-heading {
+    font-weight: bold;
+    font-size: 2.2em;
+    color: #003366;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.greeting-heading i {
+    margin-right: 10px;
+}
+
+/* Email Sent Container Styles */
+.email-sent-container {
+    margin-top: 20px;
+    background-color: #ffffff;
+    padding: 40px 30px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .email-sent-title {
-    font-size: 2.5em;
-    color: #007bff;
+    font-size: 2.8em;
+    color: #003366;
     margin-bottom: 20px;
     font-weight: bold;
     display: flex;
@@ -28,42 +57,54 @@
 .email-link {
     text-transform: uppercase;
     font-weight: bold;
+    background-color: #003366;
+    color: #ffffff;
+    padding: 12px 25px;
+    border-radius: 5px;
+    text-decoration: none;
     margin-top: 20px;
-    transition: background-color 0.3s ease;
+    display: inline-block;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .email-link:hover {
-    background-color: #0056b3;
-    border-color: #004085;
+    background-color: #ffffff;
+    color: #003366;
+}
+#lih {
+    color: #f8f9fa;
 }
 
+#lih:hover {
+    color: #003366;
+}
 .email-link i {
     margin-left: 5px;
 }
 
 .email-sent-container p {
-    font-size: 1.1em;
+    font-size: 1.2em;
     margin-top: 15px;
 }
 
 .email-sent-container a {
-    color: #007bff;
+    color: #003366;
     text-decoration: none;
     transition: color 0.3s ease;
 }
 
 .email-sent-container a:hover {
-    color:orangered;
+    color: #002244;
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
     .email-sent-title {
-        font-size: 2em;
+        font-size: 2.2em;
     }
 
     .email-sent-container {
-        padding: 30px 15px;
+        padding: 30px 20px;
     }
 
     .email-link {
@@ -79,11 +120,10 @@
     }
 
     .email-sent-container {
-        padding: 20px 10px;
+        padding: 20px 15px;
     }
 
     .email-link {
         font-size: 0.9em;
-        font-style: italic;
     }
 }

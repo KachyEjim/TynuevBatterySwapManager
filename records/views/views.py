@@ -23,8 +23,10 @@ def signup(request):
         form = SignupForm(request.POST)
         if form.is_valid():
             user = form.save()
-            context = {"user": user, "timestamp": now().timestamp()}
             send_verification_email(request, user)
+            user = user.to_dict()
+            user["first_name"] = user["first_name"].capitalize()
+            context = {"user": user, "timestamp": now().timestamp()}
             return render(request, "email_sent.html", context)
     else:
         form = SignupForm()
@@ -75,6 +77,7 @@ def verify(request):
 
 @login_required
 def dashboard(request, segment1=None, segment2=None):
+
     batteries = Battery.objects.all()
     user = request.user
     record_data = user.records.all().order_by("-created_at")
@@ -132,3 +135,13 @@ def record_ride(request):
 def logout_view(request):
     logout(request)
     return redirect("login")
+
+
+def test(request):
+    user = authenticate(
+        request, username="ejimovc+31@gmail.com", password="uwhiuery9384iuhjk"
+    )
+    user = user.to_dict()
+    user["first_name"] = user["first_name"].capitalize()
+    context = {"user": user, "timestamp": now().timestamp()}
+    return render(request, "email_verification.html", context)

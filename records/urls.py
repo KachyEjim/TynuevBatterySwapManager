@@ -1,8 +1,9 @@
 from django.urls import path
-from .views.views import signup, login_view, dashboard, logout_view
+from .views.views import signup, login_view, dashboard, logout_view, test
 from .views.emailVerify_view import send_verification_email, verify_email
 
 urlpatterns = [
+    path("test/", test, name="test"),
     path("signup/", signup, name="signup"),
     path("login/", login_view, name="login"),
     path("logout/", logout_view, name="logout"),
