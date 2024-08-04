@@ -27,16 +27,16 @@
                     <ul class="navbar-nav ml-auto">
                         {% block nav %}
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Home</a>
+                            <a class="nav-link" href="{% url 'dashboard' %}">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Features</a>
+                            <a class="nav-link" href="https://tynuev.com/accessories">Features</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">About</a>
+                            <a class="nav-link" href="https://tynuev.com/">About</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link btn btn-primary text-white" href="#">Join Us</a>
+                            <a class="nav-link btn btn-primary text-white" href="{% url 'signup' %}">Join Us</a>
                         </li>
                         {% endblock %}
                     </ul>
@@ -54,12 +54,12 @@
     <ul>
         <li><a href="#"><i class="fab fa-facebook-f"></i> Facebook</a></li>
         <li><a href="#"><i class="fab fa-twitter"></i> Twitter</a></li>
-        <li><a href="#"><i class="fab fa-instagram"></i> Instagram</a></li>
-        <li><a href="#"><i class="fab fa-linkedin-in"></i> LinkedIn</a></li>
-        <p><li><a href="#"><i class="fas fa-info-circle"></i></i> About Us</a></li></p>
-        <li>Email: info@mycompany.com</li>
-        <li>Phone: +123 456 7890</li>
-        <li>Address: 123 Street, City, Country</li>
+        <li><a href="https://www.instagram.com/tynuev?igsh=d3B1eW9qcHdjY2J5"><i class="fab fa-instagram"></i> Instagram</a></li>
+        <li><a href="https://www.linkedin.com/company/tynuev/ "><i class="fab fa-linkedin-in"></i> LinkedIn</a></li>
+        <p><li><a href="tynuev.com"><i class="fas fa-info-circle"></i></i> About Us</a></li></p>
+        <li>Email: K.Ndunwa@TynuEV.com</li>
+        <li>Phone: +2348168313095</li>
+        <li>Address: 8 Habitata Close Lekki, Lagos, Nigeria</li>
     </ul>
     <p id="fot">&copy; {{ current_year }} Tynuev. All rights reserved.</p>
 </div>

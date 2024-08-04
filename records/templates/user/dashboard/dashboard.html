@@ -13,9 +13,10 @@
 <header>
     <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
         <div class="container">
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand" href="{% url 'dashboard' %}">
                 <img src="{% static 'img/logo.svg' %}" alt="Rider Profile" id="pi" class="profile-pic">
             </a>
+            
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -26,13 +27,13 @@
                         <a class="nav-link" href="#"><i class="fa fa-info-circle"></i>Help</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link"  href="#">About</a>
+                        <a class="nav-link"  href="https://tynuev.com/">About</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#"><span class="fa fa-cog"></span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link btn btn-primary text-white" href="#"><span class="fa fa-sign-out-alt"></span>Logout</a>
+                        <a class="nav-link btn btn-primary text-white" href="{% url 'logout' %}"><span class="fa fa-sign-out-alt"></span>Logout</a>
                     </li>
                     {% endblock %}
                 </ul>
@@ -50,7 +51,7 @@
         Dashboard
     </a>
 
-    <a href="{% url 'signup' %}">
+    <a href="{% url 'dashboard' %}">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-receipt-text"><path d="M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1V2l-2 1-2-1-2 1-2-1-2 1-2-1Z"></path><path d="M14 8H8"></path><path d="M16 12H8"></path><path d="M13 16H8"></path></svg>
         Update Info
     </a>

@@ -3,18 +3,18 @@ import environ
 import os
 import dj_database_url
 
-CSRF_TRUSTED_ORIGINS = [
-    "https://e9ca-197-210-226-199.ngrok-free.app",
-    "https://tynuev.onrender.com",
-]
+
 # Define base directory
 BASE_DIR = Path(__file__).resolve().parent.parent
 # Initialize environment variables
 env = environ.Env()
 environ.Env.read_env(os.path.join(BASE_DIR, ".env"))
-
+CSRF_TRUSTED_ORIGINS = env(
+    "CSRF_TRUSTED_ORIGINS", default="https://tynuev.onrender.com"
+).split(",")
+print(CSRF_TRUSTED_ORIGINS)
 # Set secret key
-SECRET_KEY = env("SECRET_KEY", default="your-default-secret-key")
+SECRET_KEY = env("SECRET_KEY", default="quDIH3EUIY  HIJK2H98YU2 98IOHqUH3287I")
 
 # Set allowed hosts
 ALLOWED_HOSTS = env("ALLOWED_HOSTS", default="tynuev.onrender.com").split(",")
@@ -30,7 +30,7 @@ DATABASES = {
 STATIC_URL = "/static/"
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
-DEBUG = True
+DEBUG = env("DEBUG").lower == "true"
 # Application definition
 INSTALLED_APPS = [
     "records",
@@ -123,7 +123,8 @@ EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST = "smtp.gmail.com"
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = "drealkachy@gmail.com"
-EMAIL_HOST_PASSWORD = "fkeowlegtnxodmqf"
-DEFAULT_FROM_EMAIL = "Tynuev <drealkachy@gmail.com>"
+EMAIL_HOST_USER = env("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD")
+DEFAULT_FROM_EMAIL = env("DEFAULT_FROM_EMAIL")
+print(f"{EMAIL_HOST_PASSWORD}    {EMAIL_HOST_USER}    {DEFAULT_FROM_EMAIL}")
 ACCOUNT_EMAIL_SUBJECT_PREFIX = ""
