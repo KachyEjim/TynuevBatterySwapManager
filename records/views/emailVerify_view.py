@@ -64,7 +64,7 @@ def verify_email(request, uidb64, token):
             if current_timestamp - token_timestamp <= TOKEN_EXPIRATION_TIME:
                 user.is_active = True
                 user.save()
-                return redirect("login_view")
+                return redirect("login")
             else:
                 return HttpResponse("The verification link has expired.")
         else:
