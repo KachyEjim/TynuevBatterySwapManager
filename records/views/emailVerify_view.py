@@ -54,24 +54,20 @@ def verify_email(request, uidb64, token):
         user = None
 
     if user is not None:
-        # Extract timestamp from token
-        token_timestamp = email_verification_token._num_seconds_old(
-            TOKEN_EXPIRATION_TIME
-        )
-        current_time = timezone.now()
-        token_creation_time = timezone.make_aware(datetime(2001, 1, 1)) + timedelta(
-            seconds=token_timestamp
-        )
+        # Validate the token
+        if email_verification_token.check_token(user, token):
+            # Get the timestamp of when the token was created
+            token_timestamp = email_verification_token._current_timestamp()
+            current_timestamp = email_verification_token._num_seconds(timezone.now())
 
-        if (
-            email_verification_token.check_token(user, token)
-            and (current_time - token_creation_time).total_seconds()
-            < TOKEN_EXPIRATION_TIME
-        ):
-            user.is_active = True
-            user.save()
-            return redirect("login_view")
+            # Check if the token has expired
+            if current_timestamp - token_timestamp <= TOKEN_EXPIRATION_TIME:
+                user.is_active = True
+                user.save()
+                return redirect("login_view")
+            else:
+                return HttpResponse("The verification link has expired.")
         else:
-            return HttpResponse("The verification link has expired.")
+            return HttpResponse("Invalid verification link.")
     else:
         return HttpResponse("Email verification failed.")
