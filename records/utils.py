@@ -1,5 +1,6 @@
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from django.utils import timezone
+from datetime import datetime, timedelta
 
 
 class EmailVerificationTokenGenerator(PasswordResetTokenGenerator):
