@@ -56,12 +56,17 @@ def verify_email(request, uidb64, token):
     if user is not None:
         # Extract timestamp from token
         token_timestamp = email_verification_token._num_seconds_old(
-            email_verification_token._current_timestamp() - TOKEN_EXPIRATION_TIME
+            TOKEN_EXPIRATION_TIME
         )
+        current_time = timezone.now()
+        token_creation_time = timezone.make_aware(datetime(2001, 1, 1)) + timedelta(
+            seconds=token_timestamp
+        )
+
         if (
             email_verification_token.check_token(user, token)
-            and (timezone.now() - datetime(2001, 1, 1)).total_seconds()
-            < token_timestamp
+            and (current_time - token_creation_time).total_seconds()
+            < TOKEN_EXPIRATION_TIME
         ):
             user.is_active = True
             user.save()
