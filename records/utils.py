@@ -21,3 +21,9 @@ class EmailVerificationTokenGenerator(PasswordResetTokenGenerator):
 
     def _current_timestamp(self):
         return self._num_seconds(timezone.now())
+
+
+# Specify the expiration time (e.g., 2 hours)
+TOKEN_EXPIRATION_TIME = 60 * 60 * 2  # 2 hours in seconds
+
+email_verification_token = EmailVerificationTokenGenerator()
