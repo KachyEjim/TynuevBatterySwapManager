@@ -3,7 +3,10 @@ import environ
 import os
 import dj_database_url
 
-CSRF_TRUSTED_ORIGINS = ["https://e9ca-197-210-226-199.ngrok-free.app"]
+CSRF_TRUSTED_ORIGINS = [
+    "https://e9ca-197-210-226-199.ngrok-free.app",
+    "https://tynuev.onrender.com",
+]
 # Define base directory
 BASE_DIR = Path(__file__).resolve().parent.parent
 # Initialize environment variables
@@ -14,9 +17,7 @@ environ.Env.read_env(os.path.join(BASE_DIR, ".env"))
 SECRET_KEY = env("SECRET_KEY", default="your-default-secret-key")
 
 # Set allowed hosts
-ALLOWED_HOSTS = env(
-    "ALLOWED_HOSTS", default="e9ca-197-210-226-199.ngrok-free.app"
-).split(",")
+ALLOWED_HOSTS = env("ALLOWED_HOSTS", default="tynuev.onrender.com").split(",")
 
 # Database configuration using dj-database-url
 
