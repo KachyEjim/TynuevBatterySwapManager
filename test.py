@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+"""#!/usr/bin/env python3
 # rand.py
 
 import asyncio
@@ -34,3 +34,12 @@ if __name__ == "__main__":
     r1, r2, r3 = asyncio.run(main())
     print()
     print(f"r1: {r1}, r2: {r2}, r3: {r3}")
+"""
+
+import pywhatkit as pwk
+
+try:
+    pwk.sendwhatmsg("+2348134989184", "fuck you")
+    print("message sent")
+except Exception as e:
+    print(f"Error:  {e}")
