@@ -14,9 +14,6 @@ class IDTracker(BaseModel):
     last_id = models.IntegerField(default=0)
 
 
-r
-
-
 class Rider(BaseModel):
     """
     Model to store information about a rider.
