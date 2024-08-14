@@ -18,7 +18,8 @@ class Command(BaseCommand):
                 )
                 if confirmation.lower() != "yes":
                     self.stdout.write(self.style.WARNING("Operation cancelled."))
-                    return
+                    continue
+
                 model.objects.all().delete()
             self.stdout.write(self.style.SUCCESS("Successfully deleted all data."))
         except Exception as e:

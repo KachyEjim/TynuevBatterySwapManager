@@ -12,11 +12,27 @@ class Record(BaseModel):
 
     date_time = models.DateTimeField()
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="records")
-    kilometer = models.DecimalField(max_digits=50, decimal_places=3)
+    ODO = models.DecimalField(max_digits=50, decimal_places=3)
+    kilometer = models.DecimalField(max_digits=50, decimal_places=3, default=0)
     bike = models.ForeignKey(Bike, on_delete=models.CASCADE, null=True, blank=True)
     battery = models.ForeignKey(
         Battery, on_delete=models.CASCADE, null=True, blank=True
     )
+
+    """   def save(self, *args, **kwargs):
+            # Fetch the last record for the same user and bike
+            last_record = (
+                Record.objects.filter(user=self.user, bike=self.bike)
+                .order_by("-date_time")
+                .first()
+            )
+
+            if last_record:
+                self.kilometer = self.ODO - last_record.ODO
+            else:
+                self.distance = 0
+
+            super().save(*args, **kwargs)"""
 
     def __str__(self):
         """
